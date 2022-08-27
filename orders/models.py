@@ -3,7 +3,7 @@ from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
-class OrderModel(models.Model):
+class Order(models.Model):
 
     SIZES = (
         ('SMALL', 'small'),
@@ -27,5 +27,5 @@ class OrderModel(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.size + ' order by ' + self.customer.id
+        return f"{self.size} order by {self.customer.id}"
     
