@@ -1,11 +1,17 @@
 from pathlib import Path
-from decouple import config
+
+import environ
+# Initialise environment variables
+env = environ.Env()
+environ.Env.read_env()
+
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = config('SECRET_KEY')
+SECRET_KEY = env('SECRET_KEY')
 
-DEBUG = config('DEBUG')
+DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = []
 
@@ -19,7 +25,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework',
-     'corsheaders',
+    'corsheaders',
+    'phonenumber_field',
+
+    'authentication.apps.AuthenticationConfig',
+    'orders.apps.OrdersConfig'
 ]
 
 MIDDLEWARE = [
@@ -87,10 +97,11 @@ USE_I18N = True
 USE_TZ = True
 
 
-
 STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = 'authentication.User'
 
 CORS_ALLOWED_ORIGINS = [
     "https://9000-sammyjay-ideasapplatest-ua9wvdo4v0r.ws-eu63.gitpod.io",
